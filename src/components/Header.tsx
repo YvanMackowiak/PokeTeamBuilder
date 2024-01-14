@@ -9,12 +9,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+import { useTheme } from "@mui/material";
 
-const pages = ["Accueil"];
+const pages = ["Accueil", "Pokemon"];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-
+  const theme = useTheme();
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -23,19 +24,19 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#BA6A39" }}>
+    <AppBar position="static" sx={{ backgroundColor: theme.palette.background.default }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
             variant="h6"
             noWrap
+            color={theme.palette.primary.light}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".2rem",
-              color: "inherit",
             }}
           >
             PokeTeamBuilder
