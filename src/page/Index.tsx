@@ -1,11 +1,29 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import pokemonImage from "../assets/img/evolution.jpg";
 import { useApiCall } from "../api/usePokemon";
+import { ActionAreaCard } from "../components/Card";
+import pikapika from "../assets/img/pikapika.gif";
 
 export const Index = () => {
-  const { data } = useApiCall("pokemon/1");
-  console.log(data);
+  const [randomPokemonId, setRandomPokemonId] = useState<number | null>(null);
+  const [secondRandomPokemonId, setSecondRandomPokemonId] = useState<number | null>(null);
+
+  useEffect(() => {
+    const randomNumber = Math.floor(Math.random() * 1007) + 1;
+    let secondRandomNumber;
+    do {
+      secondRandomNumber = Math.floor(Math.random() * 1007) + 1;
+    } while (secondRandomNumber === randomNumber);
+
+    setRandomPokemonId(randomNumber);
+    setSecondRandomPokemonId(secondRandomNumber);
+  }, []);
+
+  const { data, loading } = useApiCall(`pokemon/${randomPokemonId}`);
+  const { data: secondData, loading: secondLoading } = useApiCall(`pokemon/${secondRandomPokemonId}`);
+  console.log("data", randomPokemonId, data);
+  console.log("second", secondRandomPokemonId, secondData);
 
   return (
     <Box>
@@ -48,6 +66,42 @@ export const Index = () => {
             Maintenant, va de l'avant, jeune dresseur ! Crée ta première équipe et commence ton périple vers la victoire
             !
           </Typography>
+        </Box>
+        <Box display="flex" justifyContent="space-between" mt={2}>
+          {loading ? (
+            <img src={pikapika} alt="pikatchu" style={{ width: "150px" }} />
+          ) : (
+            data &&
+            data.types &&
+            data.sprites && (
+              <ActionAreaCard
+                title={data?.name.fr}
+                image={data.sprites.regular}
+                type={data.types[0].image}
+                typeName={data.types[0].name}
+                secondType={data.types[1] && data.types[1].image}
+                secondTypeName={data.types[1] && data.types[1].name}
+                stats={data.stats}
+              />
+            )
+          )}
+          {secondLoading ? (
+            <img src={pikapika} alt="pikatchu" style={{ width: "150px" }} />
+          ) : (
+            secondData &&
+            secondData.types &&
+            secondData.sprites && (
+              <ActionAreaCard
+                title={secondData?.name.fr}
+                image={secondData.sprites.regular}
+                type={secondData.types[0].image}
+                typeName={secondData.types[0].name}
+                secondType={secondData.types[1] && secondData.types[1].image}
+                secondTypeName={secondData.types[1] && secondData.types[1].name}
+                stats={secondData.stats}
+              />
+            )
+          )}
         </Box>
       </Box>
     </Box>
