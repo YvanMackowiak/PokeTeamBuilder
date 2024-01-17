@@ -63,7 +63,7 @@ export interface ApiResponse {
   weight: string;
 }
 
-export const useApiCall = (apiUrl: string) => {
+export const useApiCall = (apiUrl: string, shouldCallApi: boolean) => {
   const [data, setData] = useState<ApiResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -85,7 +85,7 @@ export const useApiCall = (apiUrl: string) => {
     };
 
     fetchData();
-  }, [apiUrl]);
+  }, [apiUrl, shouldCallApi]);
 
   return { data, loading, error };
 };

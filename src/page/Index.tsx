@@ -20,8 +20,11 @@ export const Index = () => {
     setSecondRandomPokemonId(secondRandomNumber);
   }, []);
 
-  const { data, loading } = useApiCall(`pokemon/${randomPokemonId}`);
-  const { data: secondData, loading: secondLoading } = useApiCall(`pokemon/${secondRandomPokemonId}`);
+  const { data, loading } = useApiCall(`pokemon/${randomPokemonId}`, randomPokemonId !== null);
+  const { data: secondData, loading: secondLoading } = useApiCall(
+    `pokemon/${secondRandomPokemonId}`,
+    secondRandomPokemonId !== null
+  );
   console.log("data", randomPokemonId, data);
   console.log("second", secondRandomPokemonId, secondData);
 
@@ -75,6 +78,7 @@ export const Index = () => {
             data.types &&
             data.sprites && (
               <ActionAreaCard
+                id={data.pokedexId}
                 title={data?.name.fr}
                 image={data.sprites.regular}
                 type={data.types[0].image}
@@ -92,6 +96,7 @@ export const Index = () => {
             secondData.types &&
             secondData.sprites && (
               <ActionAreaCard
+                id={secondData.pokedexId}
                 title={secondData?.name.fr}
                 image={secondData.sprites.regular}
                 type={secondData.types[0].image}

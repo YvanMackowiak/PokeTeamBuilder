@@ -4,6 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Box, CardActionArea } from "@mui/material";
+import { useHistory } from "react-router-dom";
 
 interface ActionAreaCardProps {
   title: string;
@@ -13,6 +14,7 @@ interface ActionAreaCardProps {
   secondType?: string;
   secondTypeName?: string;
   stats: { atk: number; def: number; hp: number; spe_atk: number; spe_def: number; vit: number };
+  id: number;
 }
 
 export const ActionAreaCard = ({
@@ -23,9 +25,15 @@ export const ActionAreaCard = ({
   secondType,
   secondTypeName,
   stats,
+  id,
 }: ActionAreaCardProps) => {
+  const history = useHistory();
+  const handleClick = () => {
+    history.push(`/Pokemon/${id}`);
+  };
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} onClick={handleClick}>
       <CardActionArea>
         <CardMedia component="img" height="160" image={image} alt={title} style={{ objectFit: "contain" }} />
         <CardContent>
