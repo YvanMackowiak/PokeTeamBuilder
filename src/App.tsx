@@ -6,6 +6,8 @@ import { Index } from "./page/Index";
 import { Error } from "./page/Error";
 import { Footer } from "./components/Footer";
 import SearchPokemon from "./page/SearchPokemon";
+import { useSelector } from "react-redux";
+import Pokemon from "./page/Pokemon";
 
 const theme = createTheme({
   palette: {
@@ -29,6 +31,10 @@ const theme = createTheme({
 });
 
 function App() {
+  const selectPokemon = useSelector((data: any) => data.userReducer.action?.pokemon_id);
+
+  console.log(selectPokemon);
+
   return (
     <Router>
       <ThemeProvider theme={theme}>
@@ -44,7 +50,8 @@ function App() {
           <Switch>
             <Route path="/" exact component={Index} />
             <Route path="/Accueil" exact component={Index} />
-            <Route path="/Pokemon" exact component={SearchPokemon} />
+            <Route path="/Pokemon/" exact component={SearchPokemon} />
+            <Route path="/Pokemon/:selectPokemon" exact component={Pokemon} />
             <Route component={Error} />
           </Switch>
           <Footer />

@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import { Box, CardActionArea } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { PokemonActionTypes } from "../redux/actions/enums";
 
 interface ActionAreaCardProps {
   title: string;
@@ -17,7 +18,7 @@ interface ActionAreaCardProps {
   stats: { atk: number; def: number; hp: number; spe_atk: number; spe_def: number; vit: number };
   id: number;
 }
-export const ID_POKEMON = "ID_POKEMON";
+//export const ID_POKEMON = "ID_POKEMON";
 
 export const ActionAreaCard = ({
   title,
@@ -32,8 +33,8 @@ export const ActionAreaCard = ({
   const history = useHistory();
   const dispatch = useDispatch();
   const handleClick = () => {
-    dispatch({ type: ID_POKEMON, pokemon_id: id });
-    history.push(`/Pokemon`);
+    dispatch({ type: PokemonActionTypes.ID_POKEMON, pokemon_id: id });
+    history.push(`/Pokemon/${id}`);
   };
 
   return (
