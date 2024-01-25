@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import pokemonImage from "../assets/img/evolution.jpg";
-import { useApiCall } from "../api/usePokemon";
+import { useApiCall } from "../api/usePokemonApi";
 import { ActionAreaCard } from "../components/Card";
 import pikapika from "../assets/img/pikapika.gif";
 

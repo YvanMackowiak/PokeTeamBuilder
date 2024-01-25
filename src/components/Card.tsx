@@ -4,9 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Box, CardActionArea } from "@mui/material";
-import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { PokemonActionTypes } from "../redux/actions/enums";
+import { usePokemon } from "../hooks/usePokemon";
 
 interface ActionAreaCardProps {
   title: string;
@@ -30,15 +28,15 @@ export const ActionAreaCard = ({
   stats,
   id,
 }: ActionAreaCardProps) => {
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const handleClick = () => {
-    dispatch({ type: PokemonActionTypes.ID_POKEMON, pokemon_id: id });
-    history.push(`/Pokemon/${id}`);
-  };
-
+  // const history = useHistory();
+  // const dispatch = useDispatch();
+  // const handleClick = () => {
+  //   dispatch({ type: PokemonActionTypes.ID_POKEMON, pokemon_id: id });
+  //   history.push(`/Pokemon/${id}`);
+  // };
+  const { handleClick } = usePokemon();
   return (
-    <Card sx={{ maxWidth: 345 }} onClick={handleClick}>
+    <Card sx={{ maxWidth: 345 }} onClick={() => handleClick(id)}>
       <CardActionArea>
         <CardMedia component="img" height="160" image={image} alt={title} style={{ objectFit: "contain" }} />
         <CardContent>

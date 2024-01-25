@@ -1,1 +1,3 @@
-export interface PokemonState {}
+export interface PokemonState {
+  pokemonId: number;
+}
