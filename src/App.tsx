@@ -1,12 +1,10 @@
 import { Box, ThemeProvider, createTheme } from "@mui/material";
-import React from "react";
 import Header from "./components/Header";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Index } from "./page/Index";
 import { Error } from "./page/Error";
 import { Footer } from "./components/Footer";
 import SearchPokemon from "./page/SearchPokemon";
-import { useSelector } from "react-redux";
 import Pokemon from "./page/Pokemon";
 
 const theme = createTheme({
@@ -26,14 +24,15 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Baskerville, Baskerville Old Face, Garamond, Times New Roman, serif",
+    fontFamily:
+      "Baskerville, Baskerville Old Face, Garamond, Times New Roman, serif",
   },
 });
 
 function App() {
-  const selectPokemon = useSelector((data: any) => data.userReducer.action?.pokemon_id);
+  // const selectPokemon = useSelector((data: any) => data.userReducer.action?.pokemon_id);
 
-  console.log(selectPokemon);
+  // console.log(selectPokemon);
 
   return (
     <Router>
