@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useCallback } from "react";
-import { setPokemonId } from "../redux/slices/pokemonSlice"; // Import mis à jour
+import { resetPokemonState, setPokemonId } from "../redux/slices/pokemonSlice";
 
 export const usePokemon = () => {
   const dispatch = useDispatch();
@@ -9,11 +9,20 @@ export const usePokemon = () => {
 
   const handleClick = useCallback(
     (id: number) => {
-      dispatch(setPokemonId(id)); // Utilisation de setPokemonId au lieu de pokemonUrl
+      dispatch(setPokemonId({ pokemonId: id }));
       history.push(`/Pokemon/${id}`);
     },
     [dispatch, history]
   );
 
+  return { handleClick };
+};
+
+export const useResetState = () => {
+  const dispatch = useDispatch();
+
+  const handleClick = useCallback(() => {
+    dispatch(resetPokemonState());
+  }, [dispatch]);
   return { handleClick };
 };

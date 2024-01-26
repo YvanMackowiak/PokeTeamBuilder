@@ -1,23 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PokemonState } from "../states/pokemonState";
 
-// État initial
 const initialState: PokemonState = {
   pokemonId: 0,
 };
 
-// Création du slice
 const pokemonSlice = createSlice({
   name: "pokemon",
   initialState,
   reducers: {
-    setPokemonId(state, action: PayloadAction<number>) {
-      state.pokemonId = action.payload;
+    setPokemonId: (state, action: PayloadAction<{ pokemonId: number }>) => {
+      // {type:"pokemon/setPokemonId", payload:{pokemonId:1}
+      state.pokemonId = action.payload.pokemonId;
     },
-    // Vous pouvez ajouter d'autres reducers ici
+    resetPokemonState: () => initialState, // Action pour réinitialiser l'état
   },
 });
 
-// Exportation des actions et du reducer
-export const { setPokemonId } = pokemonSlice.actions;
+export const { setPokemonId, resetPokemonState } = pokemonSlice.actions;
 export default pokemonSlice.reducer;

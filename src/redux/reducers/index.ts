@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
 import pokemonReducer from "../slices/pokemonSlice";
 
-export default combineReducers({
+const rootReducer = combineReducers({
   pokemon: pokemonReducer,
 });
+
+export default rootReducer;

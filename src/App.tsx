@@ -30,10 +30,6 @@ const theme = createTheme({
 });
 
 function App() {
-  // const selectPokemon = useSelector((data: any) => data.userReducer.action?.pokemon_id);
-
-  // console.log(selectPokemon);
-
   return (
     <Router>
       <ThemeProvider theme={theme}>
