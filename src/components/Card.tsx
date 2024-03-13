@@ -1,10 +1,8 @@
-import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Box, CardActionArea } from "@mui/material";
-import { usePokemon } from "../hooks/usePokemon";
 
 interface ActionAreaCardProps {
   title: string;
@@ -13,7 +11,14 @@ interface ActionAreaCardProps {
   typeName: string;
   secondType?: string;
   secondTypeName?: string;
-  stats: { atk: number; def: number; hp: number; spe_atk: number; spe_def: number; vit: number };
+  stats: {
+    atk: number;
+    def: number;
+    hp: number;
+    spe_atk: number;
+    spe_def: number;
+    vit: number;
+  };
   id: number;
 }
 //export const ID_POKEMON = "ID_POKEMON";
@@ -34,18 +39,34 @@ export const ActionAreaCard = ({
   //   dispatch({ type: PokemonActionTypes.ID_POKEMON, pokemon_id: id });
   //   history.push(`/Pokemon/${id}`);
   // };
-  const { handleClick } = usePokemon();
   return (
-    <Card sx={{ maxWidth: 345 }} onClick={() => handleClick(id)}>
+    <Card sx={{ maxWidth: 345 }} onClick={() => console.log(id)}>
       <CardActionArea>
-        <CardMedia component="img" height="160" image={image} alt={title} style={{ objectFit: "contain" }} />
+        <CardMedia
+          component="img"
+          height="160"
+          image={image}
+          alt={title}
+          style={{ objectFit: "contain" }}
+        />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {title}
           </Typography>
-          <Typography variant="body2" color="text.secondary" gap={1} display="flex">
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            gap={1}
+            display="flex"
+          >
             <img src={type} alt={typeName} style={{ width: "30px" }} />
-            {secondType && <img src={secondType} alt={secondTypeName} style={{ width: "30px" }} />}
+            {secondType && (
+              <img
+                src={secondType}
+                alt={secondTypeName}
+                style={{ width: "30px" }}
+              />
+            )}
           </Typography>
           <Box display="flex" gap={1} mt={1}>
             <table>

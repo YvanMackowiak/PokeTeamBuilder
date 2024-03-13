@@ -4,14 +4,13 @@ import pokemonImage from "../assets/img/evolution.jpg";
 import { useApiCall } from "../api/usePokemonApi";
 import { ActionAreaCard } from "../components/Card";
 import pikapika from "../assets/img/pikapika.gif";
-import { useResetState } from "../hooks/usePokemon";
+import { Counter } from "../counter";
 
 export const Index = () => {
   const [randomPokemonId, setRandomPokemonId] = useState<number | null>(null);
   const [secondRandomPokemonId, setSecondRandomPokemonId] = useState<
     number | null
   >(null);
-  const { handleClick } = useResetState();
 
   useEffect(() => {
     const randomNumber = Math.floor(Math.random() * 1007) + 1;
@@ -23,10 +22,6 @@ export const Index = () => {
     setRandomPokemonId(randomNumber);
     setSecondRandomPokemonId(secondRandomNumber);
   }, []);
-
-  useEffect(() => {
-    handleClick();
-  }, [handleClick]);
 
   const { data, loading } = useApiCall(
     `pokemon/${randomPokemonId}`,
@@ -56,6 +51,7 @@ export const Index = () => {
         margin="auto"
         fontSize={"1.1rem"}
       >
+        <Counter />
         <Box gap={1}>
           <Typography
             variant="h1"
