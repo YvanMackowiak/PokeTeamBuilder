@@ -10,7 +10,7 @@ export interface ApiResponse {
       /* structure si non null */
     };
     next: Array<{
-      pokedexId: number;
+      pokedex_id: number;
       name: string;
       condition: string;
     }>;
@@ -29,7 +29,7 @@ export interface ApiResponse {
     en: string;
     jp: string;
   };
-  pokedexId: number;
+  pokedex_id: number;
   resistances: Array<{
     name: string;
     multiplier: number;
@@ -71,14 +71,26 @@ export const useApiCall = (apiUrl: string, shouldCallApi: boolean) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get<ApiResponse>(`https://tyradex.vercel.app/api/v1/${apiUrl}`, {
-          headers: {
-            "e-mail": "yvansimpson@gmail.com",
-          },
-        });
+        const response = await axios.get<ApiResponse>(
+          `https://tyradex.vercel.app/api/v1/${apiUrl}`,
+          {
+            headers: {
+              "e-mail": "yvansimpson@gmail.com",
+            },
+          }
+        );
+        console.log("Réponse de l'API:", response.data);
         setData(response.data);
       } catch (error) {
-        setError("Une erreur s'est produite lors de la récupération des données.");
+        if (axios.isAxiosError(error) && error.response) {
+          setError(
+            `Erreur ${error.response.status} : ${error.response.data.message}`
+          );
+        } else {
+          setError(
+            "Une erreur s'est produite lors de la récupération des données."
+          );
+        }
       } finally {
         setLoading(false);
       }

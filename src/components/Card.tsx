@@ -3,6 +3,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Box, CardActionArea } from "@mui/material";
+import { useHistory } from "react-router-dom";
+import { useAppDispatch } from "../hooks";
+import { pokemonId } from "../store/pokemon/pokemonSlice";
 
 interface ActionAreaCardProps {
   title: string;
@@ -21,7 +24,6 @@ interface ActionAreaCardProps {
   };
   id: number;
 }
-//export const ID_POKEMON = "ID_POKEMON";
 
 export const ActionAreaCard = ({
   title,
@@ -33,14 +35,15 @@ export const ActionAreaCard = ({
   stats,
   id,
 }: ActionAreaCardProps) => {
-  // const history = useHistory();
-  // const dispatch = useDispatch();
-  // const handleClick = () => {
-  //   dispatch({ type: PokemonActionTypes.ID_POKEMON, pokemon_id: id });
-  //   history.push(`/Pokemon/${id}`);
-  // };
+  const history = useHistory();
+  const dispatch = useAppDispatch();
+
+  const handleClick = () => {
+    dispatch(pokemonId(id));
+    history.push(`/Pokemon/${id}`);
+  };
   return (
-    <Card sx={{ maxWidth: 345 }} onClick={() => console.log(id)}>
+    <Card sx={{ maxWidth: 345 }} onClick={handleClick}>
       <CardActionArea>
         <CardMedia
           component="img"

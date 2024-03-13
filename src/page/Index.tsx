@@ -4,7 +4,6 @@ import pokemonImage from "../assets/img/evolution.jpg";
 import { useApiCall } from "../api/usePokemonApi";
 import { ActionAreaCard } from "../components/Card";
 import pikapika from "../assets/img/pikapika.gif";
-import { Counter } from "../counter";
 
 export const Index = () => {
   const [randomPokemonId, setRandomPokemonId] = useState<number | null>(null);
@@ -51,7 +50,6 @@ export const Index = () => {
         margin="auto"
         fontSize={"1.1rem"}
       >
-        <Counter />
         <Box gap={1}>
           <Typography
             variant="h1"
@@ -99,7 +97,7 @@ export const Index = () => {
             data.types &&
             data.sprites && (
               <ActionAreaCard
-                id={data.pokedexId}
+                id={data.pokedex_id}
                 title={data?.name.fr}
                 image={data.sprites.regular}
                 type={data.types[0].image}
@@ -117,7 +115,7 @@ export const Index = () => {
             secondData.types &&
             secondData.sprites && (
               <ActionAreaCard
-                id={secondData.pokedexId}
+                id={secondData.pokedex_id}
                 title={secondData?.name.fr}
                 image={secondData.sprites.regular}
                 type={secondData.types[0].image}

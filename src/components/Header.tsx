@@ -14,7 +14,9 @@ import { useTheme } from "@mui/material";
 const pages = ["Accueil", "Pokemon"];
 
 function Header() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null
+  );
   const theme = useTheme();
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -24,7 +26,10 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: theme.palette.background.default }}>
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: theme.palette.background.default }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -75,7 +80,7 @@ function Header() {
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography
                     component="a"
-                    href={page}
+                    href={"/" + page}
                     textAlign="center"
                     sx={{
                       fontFamily: "monospace",
@@ -108,14 +113,14 @@ function Header() {
               textDecoration: "none",
             }}
           >
-            PokeTeamBuilder
+            PokeTeamBuilder mobile ?
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                href={page}
+                href={"/" + page}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}
