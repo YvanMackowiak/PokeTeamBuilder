@@ -63,7 +63,7 @@ export interface ApiResponse {
   weight: string;
 }
 
-export const useApiCall = (apiUrl: string, shouldCallApi: boolean) => {
+export const useApiCall = (apiUrl: string) => {
   const [data, setData] = useState<ApiResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -79,7 +79,6 @@ export const useApiCall = (apiUrl: string, shouldCallApi: boolean) => {
             },
           }
         );
-        console.log("Réponse de l'API:", response.data);
         setData(response.data);
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
@@ -97,7 +96,7 @@ export const useApiCall = (apiUrl: string, shouldCallApi: boolean) => {
     };
 
     fetchData();
-  }, [apiUrl, shouldCallApi]);
+  }, [apiUrl]);
 
   return { data, loading, error };
 };

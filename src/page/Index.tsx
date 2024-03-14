@@ -22,13 +22,9 @@ export const Index = () => {
     setSecondRandomPokemonId(secondRandomNumber);
   }, []);
 
-  const { data, loading } = useApiCall(
-    `pokemon/${randomPokemonId}`,
-    randomPokemonId !== null
-  );
+  const { data, loading } = useApiCall(`pokemon/${randomPokemonId}`);
   const { data: secondData, loading: secondLoading } = useApiCall(
-    `pokemon/${secondRandomPokemonId}`,
-    secondRandomPokemonId !== null
+    `pokemon/${secondRandomPokemonId}`
   );
   console.log("data", randomPokemonId, data);
   console.log("second", secondRandomPokemonId, secondData);

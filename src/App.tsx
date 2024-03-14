@@ -5,7 +5,7 @@ import { Index } from "./page/Index";
 import { Error } from "./page/Error";
 import { Footer } from "./components/Footer";
 import SearchPokemon from "./page/SearchPokemon";
-import Pokemon from "./page/Pokemon";
+import { Pokemon } from "./page/Pokemon";
 
 const theme = createTheme({
   palette: {
