@@ -1,12 +1,15 @@
-import { Box, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { useApiCall } from "../api/usePokemonApi";
 import { useAppSelector } from "../hooks";
 import { useEffect, useState } from "react";
 import { logos } from "../logos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 export const Pokemon = () => {
   const idPokedex = useAppSelector((state) => state.poke.id);
-  const { data, loading } = useApiCall(`pokemon/${idPokedex}`);
+  const [id, setId] = useState(idPokedex);
+  const { data, loading } = useApiCall(`pokemon/${id}`);
   const [underneath, setUnderneath] = useState<
     { name: string; multiplier: number }[]
   >([]);
@@ -48,11 +51,19 @@ export const Pokemon = () => {
               <Typography variant="h5">{data?.name.jp}</Typography>
               <Typography variant="h5">{data?.pokedex_id}</Typography>
             </Box>
-            <img
-              src={data?.sprites.regular}
-              alt={data?.name.fr}
-              style={{ width: 200 }}
-            />
+            <Box display="flex" justifyContent="center" alignItems="center">
+              <IconButton onClick={() => setId((data?.pokedex_id ?? 0) - 1)}>
+                <ArrowBackIosNewIcon /> {(data?.pokedex_id ?? 0) - 1}
+              </IconButton>
+              <img
+                src={data?.sprites.regular}
+                alt={data?.name.fr}
+                style={{ width: 200 }}
+              />
+              <IconButton onClick={() => setId((data?.pokedex_id ?? 0) + 1)}>
+                {(data?.pokedex_id ?? 0) + 1} <ArrowForwardIosIcon />
+              </IconButton>
+            </Box>
           </Box>
           <Box display="flex" justifyContent="center">
             <Box>
@@ -147,9 +158,6 @@ export const Pokemon = () => {
                 </Box>
               </Box>
             </Box>
-          </Box>
-          <Box>
-            <Typography variant="h5">Evolution et pre-evolution</Typography>
           </Box>
         </>
       )}
