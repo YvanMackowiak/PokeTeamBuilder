@@ -6,10 +6,8 @@ import { ActionAreaCard } from "../components/Card";
 import pikapika from "../assets/img/pikapika.gif";
 
 export const Index = () => {
-  const [randomPokemonId, setRandomPokemonId] = useState<number | null>(null);
-  const [secondRandomPokemonId, setSecondRandomPokemonId] = useState<
-    number | null
-  >(null);
+  const [randomPokemonId, setRandomPokemonId] = useState<number>(0);
+  const [secondRandomPokemonId, setSecondRandomPokemonId] = useState<number>(0);
 
   useEffect(() => {
     const randomNumber = Math.floor(Math.random() * 1007) + 1;

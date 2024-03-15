@@ -1,12 +1,17 @@
 import { Box, IconButton, Typography } from "@mui/material";
 import { useApiCall } from "../api/usePokemonApi";
-import { useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../hooks";
 import { useEffect, useState } from "react";
 import { logos } from "../logos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { pokemonId } from "../store/pokemon/pokemonSlice";
+import { useHistory } from "react-router-dom";
 
 export const Pokemon = () => {
+  const dispatch = useAppDispatch();
+  const history = useHistory();
+
   const idPokedex = useAppSelector((state) => state.poke.id);
   const [id, setId] = useState(idPokedex);
   const { data, loading } = useApiCall(`pokemon/${id}`);
@@ -32,6 +37,20 @@ export const Pokemon = () => {
     }
   }, [data]);
 
+  const hanleClickArrowBack = () => {
+    const newId = (data?.pokedex_id ?? 0) - 1;
+    setId(newId);
+    dispatch(pokemonId(newId));
+    history.push(`/Pokemon/${newId}`);
+  };
+
+  const handleClickArrowForward = () => {
+    const newId = (data?.pokedex_id ?? 0) + 1;
+    setId(newId);
+    dispatch(pokemonId(newId));
+    history.push(`/Pokemon/${newId}`);
+  };
+
   return (
     <>
       {loading ? (
@@ -52,7 +71,7 @@ export const Pokemon = () => {
               <Typography variant="h5">{data?.pokedex_id}</Typography>
             </Box>
             <Box display="flex" justifyContent="center" alignItems="center">
-              <IconButton onClick={() => setId((data?.pokedex_id ?? 0) - 1)}>
+              <IconButton onClick={hanleClickArrowBack}>
                 <ArrowBackIosNewIcon /> {(data?.pokedex_id ?? 0) - 1}
               </IconButton>
               <img
@@ -60,7 +79,7 @@ export const Pokemon = () => {
                 alt={data?.name.fr}
                 style={{ width: 200 }}
               />
-              <IconButton onClick={() => setId((data?.pokedex_id ?? 0) + 1)}>
+              <IconButton onClick={handleClickArrowForward}>
                 {(data?.pokedex_id ?? 0) + 1} <ArrowForwardIosIcon />
               </IconButton>
             </Box>
