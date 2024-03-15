@@ -7,6 +7,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { pokemonId } from "../store/pokemon/pokemonSlice";
 import { useHistory } from "react-router-dom";
+import BartChart from "../components/BartChart";
 
 export const Pokemon = () => {
   const dispatch = useAppDispatch();
@@ -53,7 +54,7 @@ export const Pokemon = () => {
 
   return (
     <>
-      {loading ? (
+      {loading && data ? (
         "chargement"
       ) : (
         <>
@@ -93,40 +94,7 @@ export const Pokemon = () => {
                     {data?.types.map((type) => (
                       <Typography>{type.name}</Typography>
                     ))}
-                  </Box>
-                  <Box display="flex" gap={1} mt={1}>
-                    <table>
-                      <tbody>
-                        <tr>
-                          <td>Attaque: </td>
-                          <td>{data?.stats.atk}</td>
-                        </tr>
-                        <tr>
-                          <td>Point de vie: </td>
-                          <td> {data?.stats.hp}</td>
-                        </tr>
-                        <tr>
-                          <td>Defence spécial: </td>
-                          <td>{data?.stats.spe_def} </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <table>
-                      <tbody>
-                        <tr>
-                          <td>Defence: </td>
-                          <td> {data?.stats.def}</td>
-                        </tr>
-                        <tr>
-                          <td> Attaque spécial:</td>
-                          <td> {data?.stats.spe_atk}</td>
-                        </tr>
-                        <tr>
-                          <td> Vitesse:</td>
-                          <td>{data?.stats.vit} </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <BartChart stats={data?.stats} />
                   </Box>
                 </Box>
                 <Box
